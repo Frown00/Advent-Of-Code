@@ -1,6 +1,6 @@
 # Advent-Of-Code
 
-Advent calendar of small programming puzzles
+Small programming puzzles from site named [Advent of Code](https://adventofcode.com/)
 
 # 2021 Story
 
