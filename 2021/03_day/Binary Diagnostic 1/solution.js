@@ -3,12 +3,12 @@ const fs = require('fs');
 function solvePuzzle(puzzlePath) {
   const content = readContent(puzzlePath);
   const binaryCodes = content.split(/\r?\n/);
-  const occurancesCount = [];
+  const occurrencesCount = []
   for(let binary of binaryCodes) {
     const bits = binary.split('');
     for(let i = 0; i < bits.length; i++) {
       const bit = bits[i];
-      occurancesCount[i] ? occurancesCount[i][bit]++ : occurancesCount[i] = { 1: 0, 0: 0}
+      occurrencesCount[i] ? occurrencesCount[i][bit]++ : occurrencesCount[i] = { 1: 0, 0: 0}
     }
   }
   const gammaReducer = (previousValue, currentValue) => {
@@ -19,7 +19,7 @@ function solvePuzzle(puzzlePath) {
     return previousValue + '1';
 
   };
-  const gammaRate = occurancesCount.reduce(gammaReducer, '');
+  const gammaRate = occurrencesCount.reduce(gammaReducer, '');
   const epsilonRate = gammaRate.split('').map(n => n === '1' ? '0' : '1').join('');
   const gammaRateInDecimal = parseInt(gammaRate, 2);
   const epsilonRateInDecimal = parseInt(epsilonRate, 2);
