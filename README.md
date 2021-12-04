@@ -2,6 +2,18 @@
 
 Small programming puzzles from site named [Advent of Code](https://adventofcode.com/)
 
+## What this website provide?
+
+- "well-written" story
+- description of a puzzle to solve each divided in two parts
+- generated list of input values with .txt extension
+- checking the answer
+
+## What's my job?
+
+- thorough understanding a given problem from description
+- finding solution by using any programming language (for me is Javascript)
+
 # 2021 Story
 
 You're minding your own business on a ship at sea when the overboard alarm goes off! You rush to see if you can help. Apparently, one of the Elves tripped and accidentally sent the sleigh keys flying into the ocean!
