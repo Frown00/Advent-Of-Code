@@ -1,29 +1,37 @@
 const fs = require("fs");
 
-function dayPassed(fishTimer) {
-  const timer = parseInt(fishTimer);
-  if(timer === 0) {
-    return '68';
-  }
-  if(!timer) return '';
-  return (timer - 1).toString();
-  // return toString(parseInt(fishTimer) - 1) + ','; 
-}
-
 function solvePuzzle(puzzlePath) {
   const content = readContent(puzzlePath);
-  let fishSwarmString = content.replace(/,/g, '');
+  let fishTimers = content.split(',').sort((a, b) => b - a);
+  const highestTimer = fishTimers[0];
+  let fishSwarm = {};
+  for(let i = 0; i <= highestTimer; i++) {
+    fishSwarm[i] = {};
+    fishSwarm[i] = fishTimers.filter(n => n === i.toString()).length ?? 0;
+  }
   // change time day by day until limit reached
   const dayLimit = 256;
+  const maxDays = 8;
+  const resetDay = 6;
   for(let day = 1; day <= dayLimit; day++) {
-    let population = '';
-    for(let i = 0; i <= fishSwarmString.length; i++) {
-      population += dayPassed(fishSwarmString[i])
+    const newFishSwarm = {...fishSwarm};
+    // create new
+    newFishSwarm[resetDay] = (fishSwarm[0] ?? 0) + (fishSwarm[resetDay + 1] ?? 0);
+    newFishSwarm[maxDays] = fishSwarm[0] ?? 0;
+    for(let i = 0; i < maxDays; i++) {
+      if(i === resetDay) { 
+        // do nothing
+      } 
+      else
+        newFishSwarm[i] = fishSwarm[i + 1] ?? 0;
     }
-    fishSwarmString = population;
-    console.log(day, fishSwarmString.length);
+    fishSwarm = { ...newFishSwarm };
   }
-  return fishSwarmString.length;
+  let sum = 0;
+  for(let key in fishSwarm) {
+    sum += fishSwarm[key]
+  }
+  return sum;
 }
 
 function readContent(path) {
